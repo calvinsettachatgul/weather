@@ -16,4 +16,5 @@ class AddressApi
     @options[:query][:text] = text_address
     self.class.get("/search", @options)
   end
+
 end

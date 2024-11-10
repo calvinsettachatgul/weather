@@ -50,6 +50,7 @@ group :development do
   gem "web-console"
   gem 'httparty', '~> 0.21.0'
   gem 'dotenv'
+  gem 'rspec'
 end
 
 group :test do

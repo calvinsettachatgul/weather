@@ -14,32 +14,61 @@ table, th, td {
     <%= form.text_field :zip %>
     <%= form.submit "Search" %>
   <% end %>
-    
-<table>
-postalcode <%= @postalCode %><br>
-state <%= @stateName %><br>
-city <%= @city %><br>
-lat <%=  @lat %><br>
-lon <%= @lon %><br>
-<thead>
-<tr>
-  <th></th>
-  <th>Date</th>
-  <th>Temperature</th>
-  <th>description</th>
-</tr>
-</thead>
-<tbody>
-    <% @times.each do |time| %>
-      <tr>
-        
-        <td><img src="https://openweathermap.org/img/wn/<%= time["weather"][0]["icon"] %>@2x.png"/></td>
-        <td><%= Time.at(time["dt"]) %></td>
-        <td><%= time["main"]["temp"] %></td>
-        <td><%= time["weather"][0]["description"] %></td>
+<% if(@weather) %>
+    <h1>Curent Weather for:</h1>
+    <table>
+    postalcode: <%= @postalCode %><br>
+    state: <%= @stateName %><br>
+    city: <%= @city %><br>
+    lat: <%=  @lat %><br>
+    lon: <%= @lon %><br>
+    <thead>
+    <tr>
+    <th></th>
+    <th>Date</th>
+    <th>Temperature</th>
+    <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% [@weather].each do |weather| %>
+        <tr>
+            
+            <td><img src="https://openweathermap.org/img/wn/<%= weather["weather"][0]["icon"] %>@2x.png"/></td>
+            <td><%= Time.at(weather["dt"]) %></td>
+            <td><%= weather["main"]["temp"] %></td>
+            <td><%= weather["weather"][0]["description"] %></td>
 
-      </tr>
-      <p>
-    <% end %>
-</tbody>
-</table>
+        </tr>
+        <p>
+        <% end %>
+    </tbody>
+    </table>
+<% end %>
+    
+<% if(@times) %>
+   <h1>5 day forecast:</h1>
+    <table>
+    <thead>
+    <tr>
+    <th></th>
+    <th>Date</th>
+    <th>Temperature</th>
+    <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% @times.each do |time| %>
+        <tr>
+            
+            <td><img src="https://openweathermap.org/img/wn/<%= time["weather"][0]["icon"] %>@2x.png"/></td>
+            <td><%= Time.at(time["dt"]) %></td>
+            <td><%= time["main"]["temp"] %></td>
+            <td><%= time["weather"][0]["description"] %></td>
+
+        </tr>
+        <p>
+        <% end %>
+    </tbody>
+    </table>
+<% end %>
