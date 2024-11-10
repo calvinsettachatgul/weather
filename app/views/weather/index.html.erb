@@ -1,0 +1,45 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+<%= form_with url: "/weather", method: :get do |form| %>
+    <%= form.label :street, "street address:" %>
+    <%= form.text_field :street_adddress %>
+    <%= form.label :street, "city:" %>
+    <%= form.text_field :city %>
+    <%= form.label :state, "state:" %>
+    <%= form.text_field :state %>
+    <%= form.label :zip, "zip:" %>
+    <%= form.text_field :zip %>
+    <%= form.submit "Search" %>
+  <% end %>
+    
+<table>
+postalcode <%= @postalCode %><br>
+state <%= @stateName %><br>
+city <%= @city %><br>
+lat <%=  @lat %><br>
+lon <%= @lon %><br>
+<thead>
+<tr>
+  <th></th>
+  <th>Date</th>
+  <th>Temperature</th>
+  <th>description</th>
+</tr>
+</thead>
+<tbody>
+    <% @times.each do |time| %>
+      <tr>
+        
+        <td><img src="https://openweathermap.org/img/wn/<%= time["weather"][0]["icon"] %>@2x.png"/></td>
+        <td><%= Time.at(time["dt"]) %></td>
+        <td><%= time["main"]["temp"] %></td>
+        <td><%= time["weather"][0]["description"] %></td>
+
+      </tr>
+      <p>
+    <% end %>
+</tbody>
+</table>
