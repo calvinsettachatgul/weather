@@ -1,13 +1,13 @@
 class MemoryCache
-    def initialize()
+    def initialize
       @cache = Rails.cache
     end
-    def forecast_by_lat_lon(lat, lon)
-      @options[:query][:lat] = lat
-      @options[:query][:lon] = lon
-      self.class.get("/forecast", @options)
+    def read(zipcode)
+      puts("************reading from cache***********")
+      # pp(@cache.read(zipcode))
+      @cache.read(zipcode)
     end
-    def write(key, data)
-      @cache.write(key, data, expires_in: 30.minute)
+    def write(zipcode, current, forecast)
+      @cache.write(zipcode, { current: current, forecast: forecast }, expires_in: 30.minute)
     end
-  end
+end

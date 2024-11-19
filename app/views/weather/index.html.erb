@@ -60,7 +60,6 @@ table, th, td {
     <tbody>
         <% @times.each do |time| %>
         <tr>
-            
             <td><img src="https://openweathermap.org/img/wn/<%= time["weather"][0]["icon"] %>@2x.png"/></td>
             <td><%= Time.at(time["dt"]) %></td>
             <td><%= time["main"]["temp"] %></td>
